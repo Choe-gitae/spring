@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean id="bean" class="ex1_xml3_list.ListBean">
+	<property name="intList">	<!-- setIntList() -->
+		<list>
+			<value>22</value>
+			<value>33</value>
+			<value>44</value>
+		</list>
+	</property>
+	<property name="memberList">	<!-- setMemberList() -->
+		<list>
+			<ref bean="m1"/>
+			<ref bean="m2"/>
+			<!-- 무명빈 -->
+			<bean class="ex1_xml3_list.MemberBean">
+				<!-- (3) 생성자 or setter 값 지정 -->
+				<constructor-arg value="홍자"/>
+				<constructor-arg value="30"/>
+				<constructor-arg value="ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ"/>
+<!-- 				<property name="name" value="홍자"/> -->
+<!-- 				<property name="age" value="30"/> -->
+<!-- 				<property name="message" value="ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ"/> -->
+			</bean>
+		</list>
+	</property>
+</bean>
+
+<bean id="m1" class="ex1_xml3_list.MemberBean">
+	<!-- (1) 생성자 이용 값 지정 -->
+	<constructor-arg value="홍길동"/>
+	<constructor-arg value="25"/>
+	<constructor-arg value="ㅎㅇ"/>
+</bean>
+
+<bean id="m2" class="ex1_xml3_list.MemberBean">
+	<!-- (2) setter 이용 값 지정 -->
+	<property name="name" value="홍길자"/>
+	<property name="age" value="21"/>
+	<property name="message" value="ㅎㅇㅎㅇ"/>
+</bean>
+
+</beans>
