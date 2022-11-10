@@ -23,9 +23,7 @@
 <!-- 		<property name="configLocation" value="classpath:mybatis-config.xml"/> -->
 		<property name="mapperLocations" value="classpath:mappings/board-mapping.xml"/>
 		<property name="typeAliases">
-			<list>
-				<value>board.vo.BoardVO</value>
-			</list>
+			<list><value>board.vo.BoardVO</value></list>
 		</property>
 	</bean>
 	<bean class="org.mybatis.spring.SqlSessionTemplate">

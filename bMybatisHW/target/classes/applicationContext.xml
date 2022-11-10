@@ -6,28 +6,33 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
 	<!-- 자동 빈 생성  -->
-	<context:component-scan base-package="board.impl"/>
-	
+	<context:component-scan base-package="member.impl" />
+
 	<!-- DataSource 설정 -->
-	<context:property-placeholder location="classpath:config/db.properties"/>
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="driverClassName" value="${jdbc.driver}"/>
-		<property name="url" value="${jdbc.url}"/>
-		<property name="username" value="${jdbc.username}"/>
-		<property name="password" value="${jdbc.password}"/>
+	<context:property-placeholder location="classpath:config/db.properties" />
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 	</bean>
-	
+
 	<!-- Spring과 Mybatis 연동 설정 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"/>
-<!-- 		<property name="configLocation" value="classpath:mybatis-config.xml"/> -->
-		<property name="mapperLocations" value="classpath:mappings/board-mapping.xml"/>
+<!-- 		<property name="configLocation" value="classpath:config/mybatis-config.xml"/> -->
+		<property name="mapperLocations" value="classpath:mappings/member-mapping.xml"/>
 		<property name="typeAliases">
-			<list><value>board.vo.BoardVO</value></list>
+			<list>
+				<value>member.vo.MemberVO</value>
+			</list>
 		</property>
 	</bean>
+	
+	<!-- DAO에 SqlSession(연결) 객체 주입  -->
 	<bean class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="sqlSession"/>
+		<constructor-arg ref="sqlSession"></constructor-arg>
 	</bean>
-
+	
 </beans>
